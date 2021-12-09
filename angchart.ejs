@@ -1,0 +1,80 @@
+<script src=https://unpkg.com/froalacharts@1.0.0/froalacharts.js></script>
+  <script src="https://unpkg.com/froalacharts@1.0.0/themes/froalacharts.theme.froala.js"></script>
+
+  <script type="text/javascript">   
+    var data = {  chart: {
+    "majorTMNumber": "9",
+    "minorTMNumber": "4",
+    caption: "Moisture level",
+    subcaption: "Item № 1",
+    lowerlimit: "0",
+    upperlimit: "100",
+    showvalue: "1",
+    numbersuffix: "%",
+    theme: "froala",
+    //"dataStreamUrl": ,
+    "useMessageLog": "1"    //log
+  },
+ /* "alerts": {     //alert popup
+    "alert": [{
+      // set the threshold range
+      "minvalue": "90",
+      "maxvalue": "99",
+      // action on reaching the threshold range, JavaScript function showAlert()
+      "action": "callJS",
+      "param": "showAlert('Current server CPU Utilization is low');"
+    }]
+  },  */
+  colorrange: {
+    color: [
+      {
+        minvalue: "0",
+        maxvalue: "50",
+        code: "#F2726F"
+      },
+      {
+        minvalue: "50",
+        maxvalue: "75",
+        code: "#FFC533"
+      },
+      {
+        minvalue: "75",
+        maxvalue: "100",
+        code: "#62B58F"
+      }
+    ]
+  },
+  dials: {
+    dial: [
+      {
+        value: "80",     // set value here 
+        tooltext: "9% lesser than target" // target - value % lesser than target
+      }
+    ]
+  },
+  trendpoints: {  //maybe add a 'trend arc' instead of single line (probably for temp)
+    point: [
+      {
+        startvalue: "37",    //https://www.codeproject.com/Questions/1232562/I-want-to-display-form-data-on-same-page-using-jav
+        displayvalue: "Min Moisture level",
+        thickness: "2",
+        color: "#000000",
+        usemarker: "1",
+        markerbordercolor: "#000000",
+        markertooltext: "80%",
+        trendValueDistance: "10"
+      }
+    ]
+  }
+};
+            FroalaCharts.ready(function () {
+            new FroalaCharts({
+                id: "chart_1",
+                type: 'angulargauge',
+                renderAt: 'ft',
+                width: '800',
+                height: '500',
+                dataSource: data
+            }).render();
+        });
+    </script>
