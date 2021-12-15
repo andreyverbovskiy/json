@@ -1,0 +1,170 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EMD | Dashboard</title>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="css/main_page_style.css">
+    <link rel="stylesheet" href="css/sweetalert2.css">
+    <link rel="stylesheet" href="css/ion.rangeSlider.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="css/style.css"> <!--for chart, move to css folder later-->
+
+    <!-- Add one more arrow that takes value, make sure that min gets saved and outputed, find a way to save crops and time they need to be watered -->
+    
+</head>
+
+
+<body>
+  
+    <strong>Select the crops surrounding the device<br></strong>
+    <select>
+        <!-- option tag starts -->
+            <option>marijuana</option>
+            <option>Orchid</option>
+            <option>Rose</option>
+            <option>Cocaine flowers idk</option>
+        <!-- option tag ends     -->
+        </select>   
+
+  <div class="gauge-example">
+        <div>
+            <h1>Temperature</h1>
+            <div id="demoGauge" class="gauge" style="
+               --gauge-bg: #FAB2EA;
+                --gauge-value:0;
+                width:200px;
+                height:200px;">
+
+                <div class="ticks">
+                    <div class="tithe" style="--gauge-tithe-tick:1;"></div>
+                    <div class="tithe" style="--gauge-tithe-tick:2;"></div>
+                    <div class="tithe" style="--gauge-tithe-tick:3;"></div>
+                    <div class="tithe" style="--gauge-tithe-tick:4;"></div>
+                    <div class="tithe" style="--gauge-tithe-tick:6;"></div>
+                    <div class="tithe" style="--gauge-tithe-tick:7;"></div>
+                    <div class="tithe" style="--gauge-tithe-tick:8;"></div>
+                    <div class="tithe" style="--gauge-tithe-tick:9;"></div>
+                    <div class="min"></div>
+                    <div class="mid"></div>
+                    <div class="max"></div>
+                </div>
+                <div class="tick-circle"></div>
+
+                <div class="needle">
+                    <div class="needle-head"></div>
+                </div>
+                <div class="needle2">
+                    <div class="needle2-head"></div>
+                </div>
+                <div class="labels">
+                    <div class="value-label"></div>
+                </div>
+            </div>
+            <p>
+                <label for="points">Value range 0-100</label><br />
+                <input type="range" id="gaugeValue-demoGauge" name="gaugeValue" min="0" max="100" value="0"
+                    onInput="updateGauge('demoGauge', 0, 100);" onChange="updateGauge('demoGauge', 0, 100);" />
+            </p>
+        </div>
+        <div class="gauge-glossy">
+            <h1>Moisture</h1>
+
+            <!-- Demo gauge 2-->
+            <div id="demoGauge2" class="gauge" style="
+                --gauge-bg: #d0d8fe;
+                --gauge-value:0;
+                --gauge-display-value:0;
+                width:25vw;
+                height:25vw;">
+
+                <div class="ticks">
+                    <div class="tithe" style="--gauge-tithe-tick:1;"></div>
+                    <div class="tithe" style="--gauge-tithe-tick:2;"></div>
+                    <div class="tithe" style="--gauge-tithe-tick:3;"></div>
+                    <div class="tithe" style="--gauge-tithe-tick:4;"></div>
+                    <div class="tithe" style="--gauge-tithe-tick:6;"></div>
+                    <div class="tithe" style="--gauge-tithe-tick:7;"></div>
+                    <div class="tithe" style="--gauge-tithe-tick:8;"></div>
+                    <div class="tithe" style="--gauge-tithe-tick:9;"></div>
+                    <div class="min"></div>
+                    <div class="mid"></div>
+                    <div class="max"></div>
+                </div>
+                <div class="tick-circle"></div>
+
+                <div class="needle">
+                    <div class="needle-head"></div>
+                </div>
+                
+                <div class="labels">
+                    <div class="value-label"></div>
+                </div>
+            </div>
+            <p>
+                <label for="points">value range 0-100</label><br />
+                <input type="range" id="gaugeValue-demoGauge2" name="gaugeValue" min="0" max="100" value="0"
+                    onInput="updateGauge('demoGauge2', 0, 100);" onChange="updateGauge('demoGauge2', 0, 100);" />
+            </p>
+        </div>
+        <script type="text/javascript">
+            function updateGauge(id, min, max) {
+                const newGaugeDisplayValue = document.getElementById("gaugeValue-" + id).value;
+                const newGaugeValue = Math.floor(((newGaugeDisplayValue - min) / (max - min)) * 100);
+                document.getElementById(id).style.setProperty('--gauge-display-value', newGaugeDisplayValue);
+                document.getElementById(id).style.setProperty('--gauge-value', newGaugeValue);
+            }
+        </script>
+
+    <!--
+    <%- include('header.html') %>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 my-3">
+                    <h3 class=" control-label"> Send data : </h3>
+                    <label id="advanced-checkbox">
+                        <input type="checkbox" id="auto_mode_check" class='input-checkbox'/>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <p class="ml-2">To send data, enable Data Transfer and click the limit slider speed or pressure.</p>
+                <hr>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4 id="a_m_speed">Speed</h4>
+                </div>
+                <div class="col-sm-12 pb-3" id="speed_range1">
+                    <span class="textDisplay">You can not set the speed or turn on send data</span>
+                    <input id="speed_range" type="text" name="speed_range" value="10">
+                </div>
+                <div class="col-sm-12 my-1">
+                    <hr>
+                </div>
+                <hr>
+                <div class="col-sm-12">
+                    <h4 id="a_m_pressure">Pressure</h4>
+                </div>
+                <div class="col-sm-12 pb-3" id="presser_range1">
+                    <span class="textDisplay">You can not set the pressure or turn on send data</span>
+                    <input id="presser_range" type="text" name="presser_range" value="50">
+                </div>
+            </div>
+        </div>
+
+        -->
+
+        <!-- JavaScript Bundle with Popper -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <!-- Ion Slider -->
+        <script src="js/ion.rangeSlider.min.js"></script>
+        <!-- SweetAlert2 -->
+        <script src="js/sweetalert2.min.js"></script>
+        <!-- Toastr -->
+        <script src="js/toastr.min.js"></script>
+        <script async src="js/index.js"></script>
+</body>
